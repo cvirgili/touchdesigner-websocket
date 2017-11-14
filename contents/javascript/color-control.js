@@ -15,11 +15,10 @@
      socket.on('color', function(color) {
          c = color.split('\n').join('').split('|');
          document.body.style.backgroundColor = '#' + rgbToHex(c[0], c[1], c[2]);
+         document.getElementById('color').style.backgroundColor = '#' + rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
+         document.getElementById('color').style.transform = "scale(" + (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3) + ",1)";
      });
 
-     socket.on('millis', function(ms) {
-         document.getElementById('millis').innerText = ms;
-     });
  });
 
  function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
