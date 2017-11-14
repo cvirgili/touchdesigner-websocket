@@ -1,3 +1,4 @@
+// jshint esversion:6
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -35,3 +36,23 @@ io.on('connect', function(socket) {
 http.listen(3001, function() {
     console.log('listening on *:3001');
 });
+
+
+const dgram = require('dgram');
+const server = dgram.createSocket('udp4');
+
+server.on('error', (err) => {
+    console.log(`server error:\n${err.stack}`);
+    server.close();
+});
+
+server.on('message', (msg, rinfo) => {
+    console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+});
+
+server.on('listening', () => {
+    const address = server.address();
+    console.log(`server listening ${address.address}:${address.port}`);
+});
+
+server.bind(10000);
