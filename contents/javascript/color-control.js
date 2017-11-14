@@ -1,5 +1,5 @@
  // jshint esversion:6
-
+ var c;
  window.addEventListener('load', function() {
      socket.forceNew = true;
 
@@ -13,9 +13,7 @@
      socket.on('disconnect', function() { socket.close(); });
      socket.on('close', function() { socket.close(); });
      socket.on('color', function(color) {
-         var c = color.split('\n').join('').split('|');
-         //console.log(rgbToHex(c[0], c[1], c[2]));
-
+         c = color.split('\n').join('').split('|');
          document.body.style.backgroundColor = '#' + rgbToHex(c[0], c[1], c[2]);
      });
 
@@ -24,7 +22,7 @@
      });
  });
 
- function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B) }
+ function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
 
  function toHex(n) {
      n = parseInt(n, 10);

@@ -37,15 +37,12 @@ io.on('connect', function(socket) {
         socket.emit('color', color);
     });
 
-    server.on('message', (msg, rinfo) => {
-        //console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
-        if (msg.toString().startsWith('millis'))
-            io.emit('millis', msg.toString().split(':')[1]);
-        if (msg.toString().startsWith('color'))
-            io.emit('color', msg.toString().split(':')[1]);
-    });
 });
 
+server.on('message', (msg, rinfo) => {
+    if (msg.toString().startsWith('color'))
+        io.emit('color', msg.toString().split(':')[1]);
+});
 
 http.listen(3001, function() {
     console.log('listening on *:3001');
