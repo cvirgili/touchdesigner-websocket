@@ -18,7 +18,7 @@ body {
     /* border-radius: 50% 50%; */
     /* box-shadow: black 5px; */
     margin: auto;
-    -webkit-transition: all 0.3 ease-in-out;
-    -moz-transition: all 0.3 ease-in-out;
-    transition: all 0.3 ease-in-out;
+    -webkit-transition: all 0.1 ease-in-out;
+    -moz-transition: all 0.1 ease-in-out;
+    transition: all 0.1 ease-in-out;
 }

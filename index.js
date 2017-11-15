@@ -21,18 +21,9 @@ io.on('connect', function(socket) {
         console.log('bytes: ' + bytes);
         // server.close();
     });
-    io.emit('hello!');
-    io.send('Hello!');
-    socket.send('Hello!');
-    socket.on('error', function() {
-        socket.close();
-    });
-    socket.on('close', function() {
-        socket.close();
-    });
-    socket.on('disconnect', function() {
-        //socket.close();
-    });
+    socket.on('error', function() {});
+    socket.on('close', function() {});
+    socket.on('disconnect', function() {});
     socket.on('color', function(color) {
         socket.emit('color', color);
     });
