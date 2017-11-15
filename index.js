@@ -33,6 +33,8 @@ io.on('connect', function(socket) {
 server.on('message', (msg, rinfo) => {
     if (msg.toString().startsWith('color'))
         io.emit('color', msg.toString().split(':')[1]);
+    if (msg.toString().startsWith('amp'))
+        io.emit('amp', msg.toString().split(':')[1]);
 });
 
 http.listen(3001, function() {
