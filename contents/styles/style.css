@@ -11,15 +11,34 @@ body {
     overflow: hidden;
 }
 
-#color {
+#container {
     display: block;
-    width: 50%;
-    height: 50%;
-    border-radius: 50px;
-    box-shadow: white 0px 0px 100px;
+    width: auto;
+    height: 100%;
+    padding: 0;
     margin: auto;
-    margin-top: 25vh;
-    -webkit-transition: all 0.1 ease-in-out;
-    -moz-transition: all 0.1 ease-in-out;
-    transition: all 0.1 ease-in-out;
+}
+
+#overlay {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000;
+    background: url('/contents/images/warty-final-ubuntu.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+}
+
+.color {
+    display: inline-block;
+    width: 0.2%;
+    height: 50%;
+    /* border-radius: 15px; */
+    margin: 25vh 2%;
+    -webkit-transition: all 0.5 ease-in-out;
+    -moz-transition: all 0.5 ease-in-out;
+    transition: all 0.5 ease-in-out;
 }
