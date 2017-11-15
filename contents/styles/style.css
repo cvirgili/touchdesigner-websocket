@@ -13,11 +13,12 @@ body {
 
 #color {
     display: block;
-    width: 80%;
-    height: 100%;
-    /* border-radius: 50% 50%; */
-    /* box-shadow: black 5px; */
+    width: 50%;
+    height: 50%;
+    border-radius: 50px;
+    box-shadow: white 0px 0px 100px;
     margin: auto;
+    margin-top: 25vh;
     -webkit-transition: all 0.1 ease-in-out;
     -moz-transition: all 0.1 ease-in-out;
     transition: all 0.1 ease-in-out;

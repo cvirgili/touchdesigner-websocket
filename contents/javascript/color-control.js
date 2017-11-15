@@ -1,5 +1,5 @@
  // jshint esversion:6
- var c;
+ var c, val, fg, bg;
  window.addEventListener('load', function() {
      socket.forceNew = true;
 
@@ -14,11 +14,15 @@
      socket.on('close', function() { socket.close(); });
      socket.on('color', function(color) {
          c = color.split('\n').join('').split('|');
-         document.body.style.backgroundColor = '#' + rgbToHex(c[0], c[1], c[2]);
-         document.getElementById('color').style.backgroundColor = '#' + rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
-         document.getElementById('color').style.transform = "scale(" + (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3) + ",1)";
+         fg = rgbToHex(c[0], c[1], c[2]);
+         bg = rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
+         val = (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3);
+         document.body.style.backgroundColor = '#' + bg;
+         document.getElementById('color').style.backgroundColor = '#' + fg;
+         //document.getElementById('color').style.transform = "scale(" + val + ",1) translate(0," + (document.body.clientHeight - val * document.body.clientHeight) + "px)";
+         //document.getElementById('color').style.transform = "scale(" + val + ")";
+         document.getElementById('color').style.boxShadow = "0 0 " + (val * 500) + "px #" + fg;
      });
-
  });
 
  function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
