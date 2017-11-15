@@ -1,11 +1,11 @@
  // jshint esversion:6
- var c, val, fg, bg, nitem, ampl = 0,
+ var c, val, fg, bg, div, nitem = 45,
+     ampl = 0,
      rot = 0,
      count = 0;
 
  window.addEventListener('load', function() {
      socket.forceNew = true;
-     nitem = document.getElementsByClassName('color').length;
 
      socket.on('connect', function() {
          console.log('connected');
@@ -27,19 +27,31 @@
      socket.on('amp', function(amp) {
          ampl = parseFloat(amp);
          doIt(ampl, fg);
-
+     });
+     socket.on('nitem', function(amp) {
+         ampl = parseFloat(amp);
+         doIt(ampl, fg);
      });
  });
 
+ function createItems() {
+     document.getElementById('container').innerHTML = "";
+     for (var i = 0; i < nitem; i++) {
+         div = document.createElement("div");
+         div.setAttribute("class", "color");
+         div.style.width = (100 / (nitem * 2)) + "%";
+         div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
+         div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
+         document.getElementById('container').appendChild(div);
+     }
+
+ }
 
  function doIt(amp, fg) {
-     console.log('amp: ' + amp);
-     console.log('fg: ' + fg);
-     console.log('nitem: ' + nitem);
      for (var i = 0; i < nitem; i++) {
          document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
-         document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (2 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.3) + ")";
-         count = count + 0.8;
+         document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.1) + ")";
+         count = count + 0.4;
      }
 
  }

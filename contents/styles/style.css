@@ -37,9 +37,8 @@ body {
     display: inline-block;
     width: 0.05%;
     height: 50%;
-    /* border-radius: 15px; */
-    margin: 25vh 0.005%;
-    -webkit-transition: all 0.5 ease-in-out;
-    -moz-transition: all 0.5 ease-in-out;
-    transition: all 0.5 ease-in-out;
+    margin-top: 25vh;
+    /* -webkit-transition: all 0.1 ease-in-out;
+    -moz-transition: all 0.1 ease-in-out;
+    transition: all 0.1 ease-in-out; */
 }
