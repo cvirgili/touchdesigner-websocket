@@ -7,6 +7,8 @@
  window.addEventListener('load', function() {
      socket.forceNew = true;
 
+     createItems();
+
      socket.on('connect', function() {
          console.log('connected');
          this.emit('Hello!');
@@ -28,9 +30,9 @@
          ampl = parseFloat(amp);
          doIt(ampl, fg);
      });
-     socket.on('nitem', function(amp) {
-         ampl = parseFloat(amp);
-         doIt(ampl, fg);
+     socket.on('nitem', function(n) {
+         nitem = parseInt(n);
+         createItems();
      });
  });
 
@@ -50,7 +52,7 @@
  function doIt(amp, fg) {
      for (var i = 0; i < nitem; i++) {
          document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
-         document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.1) + ")";
+         document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.01) + ")";
          count = count + 0.4;
      }
 
