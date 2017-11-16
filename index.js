@@ -37,6 +37,8 @@ server.on('message', (msg, rinfo) => {
         io.emit('amp', msg.toString().split(':')[1]);
     if (msg.toString().startsWith('nitem'))
         io.emit('nitem', msg.toString().split(':')[1]);
+    if (msg.toString().startsWith('values'))
+        io.emit('values', msg.toString().split(':')[1]);
 });
 
 http.listen(3001, function() {

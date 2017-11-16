@@ -1,5 +1,6 @@
  // jshint esversion:6
- var c, val, fg, bg, div, nitem = 45,
+ var c, val, fg, bg, div, vals = new Array(),
+     nitem = 45,
      ampl = 0,
      rot = 0,
      count = 0;
@@ -34,6 +35,13 @@
          nitem = parseInt(n);
          createItems();
      });
+     socket.on('values', function(val) {
+         vals = [];
+         vals = val.split('\n').join('').split('|');
+         for (var i = 0; i < nitem; i++) {
+             document.getElementsByClassName('color').item(i).style.transform = "scale(1," + Math.round(parseFloat(vals[i]) * 100) / 100 + ")";
+         }
+     });
  });
 
  function createItems() {
@@ -52,8 +60,8 @@
  function doIt(amp, fg) {
      for (var i = 0; i < nitem; i++) {
          document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
-         document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.01) + ")";
-         count = count + 0.4;
+         //document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.01) + ")";
+         //count = count + 0.4;
      }
 
  }
@@ -66,4 +74,4 @@
      n = Math.max(0, Math.min(n, 255));
      return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
          "0123456789ABCDEF".charAt(n % 16);
- }
+ };
