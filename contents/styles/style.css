@@ -9,6 +9,10 @@ body {
     font-family: Consolas;
     text-align: center;
     overflow: hidden;
+    background: url('/contents/images/warty-final-ubuntu.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #container {
@@ -38,7 +42,7 @@ body {
     width: 0.05%;
     height: 50%;
     margin-top: 25vh;
-    /* -webkit-transition: all 0.1 ease-in-out;
-    -moz-transition: all 0.1 ease-in-out;
-    transition: all 0.1 ease-in-out; */
+    -webkit-transition: all 0.2 ease-in-out;
+    -moz-transition: all 0.2 ease-in-out;
+    transition: all 0.2 ease-in-out;
 }

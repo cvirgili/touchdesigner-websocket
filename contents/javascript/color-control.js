@@ -27,10 +27,10 @@
          rot = rot + val;
          doIt(ampl, fg);
      });
-     socket.on('amp', function(amp) {
-         ampl = parseFloat(amp);
-         doIt(ampl, fg);
-     });
+     //  socket.on('amp', function(amp) {
+     //      ampl = parseFloat(amp);
+     //      doIt(ampl, fg);
+     //  });
      socket.on('nitem', function(n) {
          nitem = parseInt(n);
          createItems();
