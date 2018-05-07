@@ -1,9 +1,11 @@
 <html>
 
 <head>
+    <link rel="manifest" href="/contents/manifest.json">
     <link rel="stylesheet" href="/contents/styles/style.css" />
     <script src="/modules/socket.io-client/dist/socket.io.js"></script>
     <script src="/modules/osc-js/dist/osc.js"></script>
+    <script src="/contents/sw.js"></script>
     <script>
         var socket = io();
     </script>
@@ -11,9 +13,32 @@
 
 <body>
     <!-- <div id="overlay"></div> -->
+    <video id="no-sleep" type="video/mp4" loop autoplay controls width="" height="100%">
+        <source src="/contents/black.mp4"/>
+    </video>
     <div id="container">
     </div>
     <script src="/contents/javascript/color-control.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/contents/sw.js')
+                .then(function(registration) {
+                    console.log('Registration successful, scope is:', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('Service worker registration failed, error:', error);
+                });
+        }
+
+        var video = document.getElementById('no-sleep');
+
+        video.addEventListener("timeupdate", hideLoop);
+
+        function hideLoop() {
+            video.style.height = 0;
+            video.removeEventListener("timeupdate", hideLoop);
+        }
+    </script>
 </body>
 
 </html>

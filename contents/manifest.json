@@ -1,0 +1,11 @@
+{
+    "short_name": "TD Mobile FX",
+    "name": "TD Mobile FX",
+    "icons": [],
+    "start_url": "http://192.168.0.3:3001/colors",
+    "display": "fullscreen",
+    "lang": "it-IT",
+    "background_color": "#fff",
+    "theme_color": "#5bb1f9",
+    "orientation": "landscape"
+}

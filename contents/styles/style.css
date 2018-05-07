@@ -34,7 +34,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.4;
+    opacity: 0.1;
 }
 
 .color {
@@ -42,7 +42,8 @@ body {
     width: 0.05%;
     height: 50%;
     margin-top: 25vh;
-    -webkit-transition: all 0.2 ease-in-out;
-    -moz-transition: all 0.2 ease-in-out;
-    transition: all 0.2 ease-in-out;
+    -webkit-transition: all .3 ease-in-out;
+    -moz-transition: all .3 ease-in-out;
+    transition: all .3 ease-in-out;
+    box-shadow: white 0px 0px 8px;
 }
