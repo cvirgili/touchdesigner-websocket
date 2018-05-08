@@ -55,8 +55,8 @@
          div = document.createElement("div");
          div.setAttribute("class", "color");
          //div.style.width = (100 / (nitem * 2)) + "%";
-         div.style.width = Math.ceil(100 / (nitem)) + "%";
-         div.style.height = "50%";
+         div.style.width = 100 / nitem + "vw";
+         div.style.height = "40vh";
          //div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
          //div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
          div.style.backgroundColor = fg;
