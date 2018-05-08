@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <!-- <div id="overlay"></div> -->
-    <video id="no-sleep" type="video/mp4" loop autoplay controls width="" height="100%">
+    <div id="overlay"></div>
+    <video id="no-sleep" type="video/mp4" loop controls width="" height="100%">
         <source src="/contents/black.mp4"/>
     </video>
     <div id="container">
@@ -37,6 +37,7 @@
         function hideLoop() {
             video.style.height = 0;
             video.removeEventListener("timeupdate", hideLoop);
+            document.getElementById('overlay').style.display = "block";
         }
     </script>
 </body>

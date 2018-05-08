@@ -31,6 +31,9 @@
      //      ampl = parseFloat(amp);
      //      doIt(ampl, fg);
      //  });
+     socket.on('strobe', function(strb) {
+         document.getElementById('overlay').style.opacity = Math.round(parseFloat(strb) * 100) / 100;
+     });
      socket.on('nitem', function(n) {
          nitem = parseInt(n);
          createItems();
@@ -40,8 +43,10 @@
          vals = val.split('\n').join('').split('|');
          for (var i = 0; i < nitem; i++) {
              document.getElementsByClassName('color').item(i).style.transform = "scale(1," + Math.round(parseFloat(vals[i]) * 100) / 100 + ")";
+             //document.getElementsByClassName('color').item(i).style.height = Math.round(parseFloat(vals[i]) * 100) / 10 + "vh";
          }
      });
+
  });
 
  function createItems() {
@@ -49,9 +54,12 @@
      for (var i = 0; i < nitem; i++) {
          div = document.createElement("div");
          div.setAttribute("class", "color");
-         div.style.width = (100 / (nitem * 2)) + "%";
-         div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
-         div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
+         //div.style.width = (100 / (nitem * 2)) + "%";
+         div.style.width = Math.ceil(100 / (nitem)) + "%";
+         div.style.height = "50%";
+         //div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
+         //div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
+         div.style.backgroundColor = fg;
          document.getElementById('container').appendChild(div);
      }
 
@@ -60,10 +68,9 @@
  function doIt(amp, fg) {
      for (var i = 0; i < nitem; i++) {
          document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
-         //document.getElementsByClassName('color').item(i).style.transform = "scale(1," + (3 * Math.sin(count) * ((amp * Math.abs((i - nitem / 2))) / nitem) + 0.01) + ")";
-         //count = count + 0.4;
+         //document.getElementsByClassName('color').item(i).style.borderColor = '#' + bg;
      }
-
+     //  document.getElementById('overlay').style.backgroundColor = '#' + fg;
  }
 
  function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
