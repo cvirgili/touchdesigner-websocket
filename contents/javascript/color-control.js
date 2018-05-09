@@ -5,16 +5,16 @@
      rot = 0,
      count = 0;
 
- window.addEventListener('load', function() {
+ $.get('/default', function(data) {
+     console.log('color: ' + data.color);
+     console.log('nitem: ' + data.nitem);
+     nitem = parseInt(data.nitem);
+     getColor(data.color);
+     createItems();
+     doIt(0, nitem);
+ });
 
-     $.get('/default', function(data) {
-         console.log('color: ' + data.color);
-         console.log('nitem: ' + data.nitem);
-         nitem = parseInt(data.nitem);
-         getColor(data.color);
-         createItems();
-         doIt(0, nitem);
-     });
+ window.addEventListener('load', function() {
 
      socket.forceNew = true;
 
@@ -31,16 +31,10 @@
      socket.on('close', function() { socket.close(); });
      socket.on('color', function(color) {
          getColor(color);
-         val = (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3);
-         rot = rot + val;
+         //val = (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3);
+         //rot = rot + val;
          doIt(ampl, fg);
      });
-
-     function getColor(color) {
-         c = color.split('\n').join('').split('|');
-         fg = rgbToHex(c[0], c[1], c[2]);
-         bg = rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
-     }
 
      //  socket.on('amp', function(amp) {
      //      ampl = parseFloat(amp);
@@ -57,14 +51,20 @@
      socket.on('values', function(val) {
          vals = [];
          vals = val.split('\n').join('').split('|');
-         for (var i = 0; i < nitem; i++) {
+         //for (var i = 0; i < nitem; i++) {
+         for (var i = nitem - 1; i >= 0; i--) {
+
+             document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
              //document.getElementsByClassName('color').item(i).style.transform = "scale(1," + Math.round(parseFloat(vals[i]) * 100) / 100 + ")";
-             document.getElementsByClassName('color').item(i).style.height = parseFloat(vals[i]) * 90 + "vh";
-             document.getElementsByClassName('color').item(i).style.marginTop = 100 - parseFloat(vals[i]) * 90 + "vh";
+             //document.getElementsByClassName('color').item(i).style.height = parseFloat(vals[i]) * 100 + "vh";
+             //document.getElementsByClassName('color').item(i).style.marginTop = 100 - parseFloat(vals[i]) * 100 + "vh";
          }
      });
 
  });
+
+
+ var row = 20;
 
  function createItems() {
      document.getElementById('container').innerHTML = "";
@@ -73,9 +73,13 @@
          div.setAttribute("class", "color");
          //div.style.width = (100 / (nitem * 2)) + "%";
          //div.style.width = Math.round((100 / nitem) * 100) / 100 + "vw";
-         div.style.width = 100 / nitem + "vw";
+         div.style.width = 100 / (nitem / row) + "vw";
+         div.style.height = 100 / row + "vh";
          //  var gap = 100 - (Math.round((100 / nitem) * 100) / 100) * nitem;
-         //div.style.height = "40vh";
+
+         //div.style.height = "50vh";
+         div.style.marginTop = 0 + "vh";
+
          //div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
          //div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
          //  div.style.marginLeft = gap / 2 + "vw";
@@ -92,6 +96,12 @@
          //document.getElementsByClassName('color').item(i).style.borderColor = '#' + bg;
      }
      //  document.getElementById('overlay').style.backgroundColor = '#' + fg;
+ }
+
+ function getColor(color) {
+     c = color.split('\n').join('').split('|');
+     fg = rgbToHex(c[0], c[1], c[2]);
+     bg = rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
  }
 
  function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
