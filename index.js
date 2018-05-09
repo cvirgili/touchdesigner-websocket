@@ -6,6 +6,11 @@ var io = require('socket.io')(http);
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
 var clients = [];
+
+var color, nitems, values = [],
+    data = {},
+    fg;
+
 app.use('/contents', express.static(__dirname + '/contents'));
 app.use('/modules', express.static(__dirname + '/node_modules'));
 
@@ -13,6 +18,9 @@ app.get('/colors', function(req, res) {
     res.sendFile(__dirname + '/views/colors.html');
 });
 
+app.get('/default', function(req, res) {
+    res.json(data);
+});
 
 io.on('connect', function(socket) {
     clients.push(socket);
@@ -27,15 +35,16 @@ io.on('connect', function(socket) {
         clients.splice(clients.indexOf(socket), 1);
         console.log('clientsN: ' + clients.length);
     });
-    socket.on('color', function(color) {
-        socket.emit('color', color);
-    });
+    // socket.on('color', function(color) {
+    //     socket.emit('color', color);
+    // });
 
 });
 
 server.on('message', (msg, rinfo) => {
     var key = msg.toString().split(':')[0];
     var val = msg.toString().split(':')[1];
+    data[key] = val;
     io.emit(key, val);
 });
 
