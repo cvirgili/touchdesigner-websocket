@@ -5,6 +5,8 @@
      rot = 0,
      count = 0;
 
+ var row = 10;
+
  $.get('/default', function(data) {
      console.log('color: ' + data.color);
      console.log('nitem: ' + data.nitem);
@@ -12,6 +14,8 @@
      getColor(data.color);
      createItems();
      doIt(0, nitem);
+     document.getElementById('overlay').style.backgroundColor = fg;
+
  });
 
  window.addEventListener('load', function() {
@@ -43,6 +47,10 @@
 
      socket.on('strobe', function(strb) {
          document.getElementById('overlay').style.opacity = Math.round(parseFloat(strb) * 100) / 100;
+         if (parseFloat(strb) < 0.1)
+             document.getElementById('overlay').style.backgroundColor = fg;
+         else
+             document.getElementById('overlay').style.backgroundColor = "#fff";
      });
      socket.on('nitem', function(n) {
          nitem = parseInt(n);
@@ -63,8 +71,6 @@
 
  });
 
-
- var row = 20;
 
  function createItems() {
      document.getElementById('container').innerHTML = "";
@@ -95,7 +101,7 @@
          document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
          //document.getElementsByClassName('color').item(i).style.borderColor = '#' + bg;
      }
-     //  document.getElementById('overlay').style.backgroundColor = '#' + fg;
+     document.getElementById('overlay').style.backgroundColor = '#' + fg;
  }
 
  function getColor(color) {

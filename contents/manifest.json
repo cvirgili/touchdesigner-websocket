@@ -5,7 +5,7 @@
     "start_url": "http://192.168.0.3:3001/colors",
     "display": "fullscreen",
     "lang": "it-IT",
-    "background_color": "#fff",
+    "background_color": "#000",
     "theme_color": "#5bb1f9",
     "orientation": "portrait"
 }
