@@ -33,9 +33,9 @@ body {
     z-index: 1000;
     /* background-color: rgb(255, 252, 240); */
     opacity: 0;
-    /* -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    transition: all .1s linear; */
+    /* -webkit-transition: all .01s linear;
+    -moz-transition: all .01s linear;
+    transition: all .01s linear; */
 }
 
 .color {

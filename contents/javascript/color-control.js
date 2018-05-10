@@ -5,7 +5,8 @@
      rot = 0,
      count = 0;
 
- var row = 10;
+ var rows = 10,
+     cols = 10;
 
  $.get('/default', function(data) {
      console.log('color: ' + data.color);
@@ -39,11 +40,13 @@
      });
 
      socket.on('strobe', function(strb) {
+         document.getElementById('overlay').style.backgroundColor = (parseFloat(strb) < 0.20) ? fg : "#fff";
          document.getElementById('overlay').style.opacity = parseFloat(strb);
-         document.getElementById('overlay').style.backgroundColor = (parseFloat(strb) > 0.15) ? "#fff" : fg;
      });
      socket.on('nitem', function(n) {
-         nitem = parseInt(n);
+         rows = parseInt(n.split('|')[0]);
+         cols = parseInt(n.split('|')[1]);
+         nitem = rows * cols;
          createItems();
      });
      socket.on('values', function(val) {
@@ -62,8 +65,8 @@
      for (var i = 0; i < nitem; i++) {
          div = document.createElement("div");
          div.setAttribute("class", "color");
-         div.style.width = 100 / (nitem / row) + "vw";
-         div.style.height = 100 / row + "vh";
+         div.style.width = 100 / cols + "vw";
+         div.style.height = 100 / rows + "vh";
          div.style.marginTop = 0 + "vh";
          div.style.backgroundColor = fg;
          document.getElementById('container').appendChild(div);
