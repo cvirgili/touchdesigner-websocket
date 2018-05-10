@@ -15,6 +15,12 @@ body {
     background-position: center;
 }
 
+html,
+body,
+button {
+    font-size: 5vh;
+}
+
 #container {
     display: block;
     width: 100vw;
@@ -31,22 +37,27 @@ body {
     height: 100%;
     position: absolute;
     z-index: 1000;
-    /* background-color: rgb(255, 252, 240); */
     opacity: 0;
-    /* -webkit-transition: all .01s linear;
-    -moz-transition: all .01s linear;
-    transition: all .01s linear; */
 }
 
 .color {
-    margin-top: 100vh;
     display: inline-block;
-    /* -webkit-transition: all .1s linear;
-    -moz-transition: all .1s linear;
-    transition: all .1s linear; */
-    /*border-radius: 50%;*/
-    background: url('/contents/images/eye.png');
+    margin: 0;
+    padding: 0;
+    background: url('/contents/images/star.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    -webkit-transition: transform .5s linear;
+    -moz-transition: transform .5s linear;
+    transition: transform .5s linear;
+}
+
+#reloadbtn {
+    width: 50vw;
+    height: 50vh;
+    position: absolute;
+    z-index: 1100;
+    left: 25vw;
+    top: 25vh;
 }
