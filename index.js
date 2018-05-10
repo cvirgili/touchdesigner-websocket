@@ -25,13 +25,13 @@ app.get('/default', function(req, res) {
 io.on('connect', function(socket) {
     clients.push(socket);
     console.log('clientsN: ' + clients.length);
-    server.send('hello:' + clients.indexOf(socket) + '\n', 15000);
+    //server.send('hello:' + clients.indexOf(socket) + '\n', 15000);
     socket.on('error', function() {});
     socket.on('close', function() {
 
     });
     socket.on('disconnect', function() {
-        server.send('bye:' + clients.indexOf(socket) + '\n', 15000);
+        //server.send('bye:' + clients.indexOf(socket) + '\n', 15000);
         clients.splice(clients.indexOf(socket), 1);
         console.log('clientsN: ' + clients.length);
     });
@@ -43,7 +43,7 @@ io.on('connect', function(socket) {
 
 server.on('message', (msg, rinfo) => {
     var key = msg.toString().split(':')[0];
-    var val = msg.toString().split(':')[1];
+    var val = msg.toString().split(':')[1].trim();
     data[key] = val;
     io.emit(key, val);
 });
@@ -51,8 +51,6 @@ server.on('message', (msg, rinfo) => {
 http.listen(3001, function() {
     console.log('listening on *:3001');
 });
-
-
 
 server.on('error', (err) => {
     console.log(`server error:\n${err.stack}`);

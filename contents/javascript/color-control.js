@@ -11,9 +11,9 @@
      console.log('color: ' + data.color);
      console.log('nitem: ' + data.nitem);
      nitem = parseInt(data.nitem);
-     getColor(data.color);
+     fg = data.color + "";
      createItems();
-     doIt(0, nitem);
+     doIt();
      document.getElementById('overlay').style.backgroundColor = fg;
 
  });
@@ -34,23 +34,13 @@
      socket.on('disconnect', function() { socket.close(); });
      socket.on('close', function() { socket.close(); });
      socket.on('color', function(color) {
-         getColor(color);
-         //val = (((Math.max(0, Math.min(parseInt(c[0]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[1]), 255)) / 255) + (Math.max(0, Math.min(parseInt(c[2]), 255)) / 255)) / 3);
-         //rot = rot + val;
-         doIt(ampl, fg);
+         fg = color.substr(0, 7);
+         doIt();
      });
 
-     //  socket.on('amp', function(amp) {
-     //      ampl = parseFloat(amp);
-     //      doIt(ampl, fg);
-     //  });
-
      socket.on('strobe', function(strb) {
-         document.getElementById('overlay').style.opacity = Math.round(parseFloat(strb) * 100) / 100;
-         if (parseFloat(strb) < 0.1)
-             document.getElementById('overlay').style.backgroundColor = fg;
-         else
-             document.getElementById('overlay').style.backgroundColor = "#fff";
+         document.getElementById('overlay').style.opacity = parseFloat(strb);
+         document.getElementById('overlay').style.backgroundColor = (parseFloat(strb) > 0.15) ? "#fff" : fg;
      });
      socket.on('nitem', function(n) {
          nitem = parseInt(n);
@@ -59,13 +49,8 @@
      socket.on('values', function(val) {
          vals = [];
          vals = val.split('\n').join('').split('|');
-         //for (var i = 0; i < nitem; i++) {
          for (var i = nitem - 1; i >= 0; i--) {
-
              document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
-             //document.getElementsByClassName('color').item(i).style.transform = "scale(1," + Math.round(parseFloat(vals[i]) * 100) / 100 + ")";
-             //document.getElementsByClassName('color').item(i).style.height = parseFloat(vals[i]) * 100 + "vh";
-             //document.getElementsByClassName('color').item(i).style.marginTop = 100 - parseFloat(vals[i]) * 100 + "vh";
          }
      });
 
@@ -77,45 +62,18 @@
      for (var i = 0; i < nitem; i++) {
          div = document.createElement("div");
          div.setAttribute("class", "color");
-         //div.style.width = (100 / (nitem * 2)) + "%";
-         //div.style.width = Math.round((100 / nitem) * 100) / 100 + "vw";
          div.style.width = 100 / (nitem / row) + "vw";
          div.style.height = 100 / row + "vh";
-         //  var gap = 100 - (Math.round((100 / nitem) * 100) / 100) * nitem;
-
-         //div.style.height = "50vh";
          div.style.marginTop = 0 + "vh";
-
-         //div.style.marginLeft = (100 / (nitem * 2)) / 2 + "%";
-         //div.style.marginRight = (100 / (nitem * 2)) / 2 + "%";
-         //  div.style.marginLeft = gap / 2 + "vw";
-         //  div.style.marginRight = gap / 2 + "vw";
          div.style.backgroundColor = fg;
          document.getElementById('container').appendChild(div);
      }
 
  }
 
- function doIt(amp, fg) {
+ function doIt() {
      for (var i = 0; i < nitem; i++) {
-         document.getElementsByClassName('color').item(i).style.backgroundColor = '#' + fg;
-         //document.getElementsByClassName('color').item(i).style.borderColor = '#' + bg;
+         document.getElementsByClassName('color').item(i).style.backgroundColor = fg;
      }
-     document.getElementById('overlay').style.backgroundColor = '#' + fg;
- }
-
- function getColor(color) {
-     c = color.split('\n').join('').split('|');
-     fg = rgbToHex(c[0], c[1], c[2]);
-     bg = rgbToHex((255 - parseInt(c[0])), (255 - parseInt(c[1])), (255 - parseInt(c[2])));
- }
-
- function rgbToHex(R, G, B) { return toHex(R) + toHex(G) + toHex(B); }
-
- function toHex(n) {
-     n = parseInt(n, 10);
-     if (isNaN(n)) return "00";
-     n = Math.max(0, Math.min(n, 255));
-     return "0123456789ABCDEF".charAt((n - n % 16) / 16) +
-         "0123456789ABCDEF".charAt(n % 16);
+     document.getElementById('overlay').style.backgroundColor = fg;
  }

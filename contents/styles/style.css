@@ -33,20 +33,20 @@ body {
     z-index: 1000;
     /* background-color: rgb(255, 252, 240); */
     opacity: 0;
-    -webkit-transition: background-color .5s ease;
-    -moz-transition: background-color .5s ease;
-    transition: background-color .5s ease;
+    /* -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    transition: all .1s linear; */
 }
 
 .color {
     margin-top: 100vh;
     display: inline-block;
-    /* -webkit-transition: all .5s ease;
-    -moz-transition: all .5s ease;
-    transition: all .5s ease; */
-    /* -webkit-transition: all .1s ease;
-    -moz-transition: all .1s ease;
-    transition: all .1s ease; */
-    /* border-radius: 15px; */
+    /* -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    transition: all .1s linear; */
     border-radius: 50%;
+    background: url('/contents/images/eye.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
