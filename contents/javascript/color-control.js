@@ -9,41 +9,41 @@
      console.log('color: ' + data.color);
      console.log('nitem: ' + data.nitem);
      getNItems(data.nitem);
-     fg = data.color + "";
+     fg = data.color.substr(0, 7);
      document.getElementById('overlay').style.backgroundColor = fg;
- });
-
- socket.forceNew = true;
-
- socket.on('connect', function() {});
- socket.on('error', function() { socket.close(); });
- socket.on('disconnect', function() { socket.close(); });
- socket.on('close', function() { socket.close(); });
- socket.on('color', function(color) {
-     fg = color.substr(0, 7);
-     doIt();
- });
-
- socket.on('strobe', function(strb) {
-     document.getElementById('overlay').style.backgroundColor = (parseFloat(strb) < 0.20) ? fg : "#ffffff";
-     document.getElementById('overlay').style.opacity = parseFloat(strb);
- });
-
- socket.on('nitem', function(n) {
-     getNItems(n);
-     createItems();
- });
-
- socket.on('values', function(val) {
-     vals = val.split('\n').join('').split('|');
-     for (var i = nitem - 1; i >= 0; i--) {
-         document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
-     }
  });
 
  window.addEventListener('load', function() {
      createItems();
      doIt();
+
+     //socket.forceNew = true;
+
+     socket.on('connect', function() {});
+     socket.on('error', function() { socket.close(); });
+     socket.on('disconnect', function() { socket.close(); });
+     socket.on('close', function() { socket.close(); });
+     socket.on('color', function(color) {
+         fg = color.substr(0, 7);
+         doIt();
+     });
+
+     socket.on('strobe', function(strb) {
+         document.getElementById('overlay').style.backgroundColor = (parseFloat(strb) < 0.20) ? fg : "#ffffff";
+         document.getElementById('overlay').style.opacity = parseFloat(strb);
+     });
+
+     socket.on('nitem', function(n) {
+         getNItems(n);
+         createItems();
+     });
+
+     socket.on('values', function(val) {
+         vals = val.split('\n').join('').split('|');
+         for (var i = nitem - 1; i >= 0; i--) {
+             document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
+         }
+     });
  });
 
  function getNItems(n) {

@@ -44,7 +44,7 @@ body {
     /* -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     transition: all .1s linear; */
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     background: url('/contents/images/eye.png');
     background-size: cover;
     background-repeat: no-repeat;
