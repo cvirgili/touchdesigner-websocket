@@ -42,9 +42,9 @@ button {
     display: inline-block;
     margin: 0;
     padding: 0;
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    transition: all .2s ease;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
 #reloadbtn {

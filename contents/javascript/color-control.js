@@ -6,7 +6,7 @@
  var rows = 10,
      cols = 10;
 
- var svgname = "box.svg";
+ var svgname = "hex.svg";
 
  $.get('/default', function(data) {
      getNItems(data.nitem);
@@ -62,8 +62,10 @@
      socket.on('values', function(val) {
          vals = val.split('\n').join('').split('|');
          for (var i = nitem - 1; i >= 0; i--) {
-             document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
-             document.getElementsByClassName('color').item(i).style.transform = parseFloat(vals[nitem - i - 1]) <= 0.2 ? "scale(0.5,.5)" : "scale(" + scalemax + ")";
+             if (document.getElementsByClassName('color').item(i).style.webkitAnimationPlayState != "running") {
+                 document.getElementsByClassName('color').item(i).style.opacity = parseFloat(vals[nitem - i - 1]);
+                 document.getElementsByClassName('color').item(i).style.transform = parseFloat(vals[nitem - i - 1]) <= 0.2 ? "scale(0.5,.5)" : "scale(" + scalemax + ")";
+             }
          }
      });
  });
