@@ -6,7 +6,7 @@
  var rows = 10,
      cols = 10;
 
- var svgname = "hex.svg";
+ var svgname = "box.svg";
 
  $.get('/default', function(data) {
      getNItems(data.nitem);
