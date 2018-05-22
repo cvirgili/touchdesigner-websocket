@@ -8,7 +8,7 @@ var c, val, fg, bg = "0,0,0",
 var rows = 10,
     cols = 10;
 
-var svgname = "hex.svg";
+var svgname = "circle.svg";
 
 $.get('/default', function(data) {
     getNItems(data.nitem);
@@ -115,7 +115,7 @@ function setColor() {
     for (var i = 0; i < nitem; i++) {
         try {
             document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('fill', 'hsl(' + rgbToHsl(itemrgb) + ')');
-            document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('preserveAspectRatio', 'none');
+            //document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('preserveAspectRatio', 'none');
         } catch (err) {}
     }
 }
