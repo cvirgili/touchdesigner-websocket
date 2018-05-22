@@ -8,11 +8,12 @@ var c, val, fg, bg = "0,0,0",
 var rows = 10,
     cols = 10;
 
-var svgname = "star.svg";
+var svgname = "hex.svg";
 
 $.get('/default', function(data) {
     getNItems(data.nitem);
     fg = 'hsl(' + rgbToHsl(data.color) + ')';
+    scalemax = parseFloat(data.scale);
 }).fail(function() {
     onDisconnect();
 });
@@ -162,5 +163,5 @@ function rgbToHsl(color) {
         }
     }
     s = s;
-    return (h /*+ Math.floor(360 * Math.random()) % 360*/ ) + ',' + Math.floor(s * 100) + '%,' + Math.floor(l * 100 /*- (Math.floor(10 * Math.random()))*/ ) + '%';
+    return (h /*+ Math.floor(360 * Math.random()) % 360*/ ) + ',' + Math.floor(s * 100 - (Math.floor(30 * Math.random()))) + '%,' + Math.floor(l * 100 /*- (Math.floor(50 * Math.random()))*/ ) + '%';
 }
