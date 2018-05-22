@@ -1,18 +1,18 @@
 // jshint esversion:6
 var add, cint, hexStr, itemrgb = "127,127,127";
-var c, val, fg, bg, div, svg, vals = [],
+var c, val, fg, bg = "0,0,0",
+    div, svg, vals = [],
     nitem, strobeval = 0,
     scalemax = 1.2;
 
 var rows = 10,
     cols = 10;
 
-var svgname = "box.svg";
+var svgname = "star.svg";
 
 $.get('/default', function(data) {
     getNItems(data.nitem);
-    fg = rgbToHsl(data.color.substr(0, data.color.length - 1));
-    //document.getElementById('overlay').style.backgroundColor = fg;
+    fg = 'hsl(' + rgbToHsl(data.color) + ')';
 }).fail(function() {
     onDisconnect();
 });
@@ -40,7 +40,13 @@ window.addEventListener('load', function() {
 
     socket.on('color', function(color) {
         itemrgb = color;
-        fg = 'hsl(' + rgbToHsl(color.substr(0, color.length - 1)) + ')'; //.substr(0, 7);
+        fg = 'hsl(' + rgbToHsl(color.substr(0, color.length - 1)) + ')';
+        setColor();
+    });
+
+    socket.on('bgcolor', function(color) {
+        bg = color.substr(0, color.length - 1);
+        bg = 'rgb(' + (color.substr(0, color.length - 1)) + ')';
         setColor();
     });
 
@@ -103,6 +109,7 @@ function createItems() {
 
 function setColor() {
     document.getElementById('overlay').style.backgroundColor = fg;
+    document.body.style.backgroundColor = bg;
     if (document.getElementsByClassName("svgobj").length == 0) return;
     for (var i = 0; i < nitem; i++) {
         try {
@@ -155,5 +162,5 @@ function rgbToHsl(color) {
         }
     }
     s = s;
-    return h + Math.floor(Math.random() * 50) % 360 + ',' + Math.floor(s * 100) + '%,' + Math.floor(l * 100) + '%';
+    return (h /*+ Math.floor(360 * Math.random()) % 360*/ ) + ',' + Math.floor(s * 100) + '%,' + Math.floor(l * 100 /*- (Math.floor(10 * Math.random()))*/ ) + '%';
 }

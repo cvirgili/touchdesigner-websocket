@@ -1,9 +1,3 @@
-/*
- *  EVE Milano sw.js
- *  Copyright 2017 Giovanni Sacheli All rights reserved.
- *  Version 1.2 (20 settembre 2017)
- */
-
 self.addEventListener('install', e => {
     //console.log('PWA Service Worker installing.');
     //let timeStamp = Date.now();
