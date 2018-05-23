@@ -8,7 +8,7 @@ var c, val, fg, bg = "0,0,0",
 var rows = 10,
     cols = 10;
 
-var svgname = "circle.svg";
+var svgname = "box.svg";
 
 $.get('/default', function(data) {
     getNItems(data.nitem);
@@ -19,6 +19,9 @@ $.get('/default', function(data) {
 });
 
 window.addEventListener('load', function() {
+
+    document.body.style.backgroundImage = "url('/contents/images/" + svgname + "')";
+    document.body.style.backgroundSize = "0";
     createItems();
     setColor();
 
@@ -115,7 +118,7 @@ function setColor() {
     for (var i = 0; i < nitem; i++) {
         try {
             document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('fill', 'hsl(' + rgbToHsl(itemrgb) + ')');
-            //document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('preserveAspectRatio', 'none');
+            document.getElementsByClassName("svgobj").item(i).contentDocument.getElementsByClassName('mysvg').item(0).setAttribute('preserveAspectRatio', 'none');
         } catch (err) {}
     }
 }
@@ -163,5 +166,5 @@ function rgbToHsl(color) {
         }
     }
     s = s;
-    return (h /*+ Math.floor(360 * Math.random()) % 360*/ ) + ',' + Math.floor(s * 100 - (Math.floor(30 * Math.random()))) + '%,' + Math.floor(l * 100 /*- (Math.floor(50 * Math.random()))*/ ) + '%';
+    return (h /*+ Math.floor(360 * Math.random()) % 360*/ ) + ',' + Math.floor(s * 100 /* - (Math.floor(30 * Math.random()))*/ ) + '%,' + Math.floor(l * 100 /*- (Math.floor(50 * Math.random()))*/ ) + '%';
 }
